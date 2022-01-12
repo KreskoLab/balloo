@@ -101,9 +101,8 @@ export default {
       let field = this.fields.find(field => field.name == select.name)
 
       if (select.multiple) {
-        let indexes = subcategory.map(item => {
-          return field.langs.find(lang => lang.lang == select.lang).options.findIndex(option => option == item)
-        }) 
+        let indexes = subcategory.map(item => field.langs.find(lang => lang.lang == select.lang).options.findIndex(option => option == item)) 
+        field.langs.forEach(lang => lang.value = [])
         indexes.forEach(index => field.langs.forEach(lang => lang.value.push(lang.options[index])))
       }
       else {
