@@ -105,7 +105,6 @@ export default {
             this.selected.splice(index, 1)
         },
         selectOption(option) {
-            console.log(option);
             if (this.multiple) {
                 this.isSelected(option) ? this.unSelect(option) : this.selected.push(option)
                 this.$emit('selected', this.selected)

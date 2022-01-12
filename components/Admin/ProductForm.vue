@@ -20,7 +20,7 @@
 
             <AdminImageUpload />
 
-            <div class="flex flex-grow flex-col space-y-12 py-4">
+            <div class="flex flex-col space-y-12 py-4">
 
                 <div class="grid grid-cols-3 gap-x-6 gap-y-6">
                     <div v-for="input in computed_inputs" :key="input.name">
@@ -45,19 +45,23 @@
                 </div>
 
                 <div class="grid grid-cols-3 gap-x-6 gap-y-6">
-                    <div v-for="input in local_filters" :key="input.name">
+                    <div v-for="filter in computed_filters" :key="filter.name">
                         <AdminInput 
-                            :name="input.name"
-                            :label="input.label"
-                            :value="input.value"
-                            @text="updateInput(input, $event)"
+                            :name="filter.name"
+                            :label="filter.label"
+                            :value="filter.value"
+                            @text="updateFilter(filter, $event)"
                         />
                     </div>
                 </div>
 
-            </div>
+                <button class="btn font-medium flex-grow">
+                    Добавить
+                </button>
 
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -94,6 +98,11 @@ export default {
             return JSON.parse(JSON.stringify(this.local_inputs)).map(({ name, ...rest }) => {
                 return { ...this.findLang(rest), name }
             })
+        },
+        computed_filters() {
+            return JSON.parse(JSON.stringify(this.local_filters)).map(({ name, ...rest }) => {
+                return { ...this.findLang(rest), name }
+            })
         }
     },
     methods: {
@@ -109,6 +118,9 @@ export default {
                 local_input.langs.find(item => item.lang == input.lang).value = text
             }
         },
+        updateFilter(filter, text) {
+            this.local_filters.find(item => item.name == filter.name).langs.find(lang => lang.lang == filter.lang).value = text
+        },
         async updateSelect(select, subcategory) {
             let options = this.local_selects[0].langs.find(item => item.lang == select.lang).options
             let index = options.findIndex(item => item.option == subcategory)
@@ -118,9 +130,10 @@ export default {
             await this.getFilters(filter)
         },
         async getFilters(id) {
+            this.local_filters = []
+
             await this.$axios.$get(`api/filter/${id}`)
             .then((res) => {
-                this.local_filters = []
                 res.filters.forEach(filter => {
                    filter.langs = filter.langs.map(item => ({...item, label: item.value, value: ''}))
                    this.local_filters.push(filter)

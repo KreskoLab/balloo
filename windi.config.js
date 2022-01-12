@@ -6,7 +6,7 @@ export default defineConfig({
     exclude: ['node_modules', '.git'],
   },
   shortcuts: {
-    'btn': 'px-4 py-1 rounded-none border-gray-800 border-4 transition duration-150 hover:(border-orange-400) focus:(outline-none border-orange-400 ring-0) active:(border-green-400)',
+    'btn': 'w-min px-4 py-1 rounded-none border-gray-800 border-4 transition duration-150 hover:(border-orange-400) focus:(outline-none border-orange-400 ring-0) active:(border-green-400)',
     'form': 'w-full border-2 border-gray-500 p-5'
   },
   plugins: [
