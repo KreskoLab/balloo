@@ -1,5 +1,5 @@
 <template>
-    <div class="relative h-96 w-72">
+    <div class="relative w-full h-full">
         <div class="w-full h-full border-2 border-dashed border-gray-600 hover:(border-orange-400)" v-if="image.length == 0">
             <input 
                 name="dropzone"

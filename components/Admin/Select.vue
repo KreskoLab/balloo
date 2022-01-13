@@ -16,17 +16,19 @@
 
         </button>
 
-        <ul class="absolute w-full bg-light-50 shadow-sm z-10 mt-1" v-if="active">
-            <li 
-                v-for="option in options" 
-                :key="option"
-                :class="selected.includes(option) ? 'bg-orange-400 bg-opacity-20' : ''"
-                @click="selectOption(option)"
-            >
-                {{ option }} 
-            </li>
-        </ul>
-        
+
+        <transition name="fade">
+            <ul class="absolute w-full bg-light-50 shadow-sm z-10 mt-1" v-if="active">
+                <li 
+                    v-for="option in options" 
+                    :key="option"
+                    :class="selected.includes(option) ? 'bg-orange-400 bg-opacity-20' : ''"
+                    @click="selectOption(option)"
+                >
+                    {{ option }} 
+                </li>
+            </ul>
+        </transition>
     </div>
 </template>
 
@@ -137,5 +139,13 @@ li {
     select-none
     even:mt-1
     hover:(bg-orange-400 bg-opacity-20 transition duration-300) py-2
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

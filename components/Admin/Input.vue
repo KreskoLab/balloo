@@ -1,17 +1,17 @@
 <template>
-  <div class="relative flex">
+  <div class="relative">
 
     <input 
       @input="$emit('text', $event.target.value)" 
       :value="value"
-      :id="name" 
+      :id="name"
       class="input" 
       type="text" 
       placeholder=" "
     >
 
     <label 
-      class="absolute top-1 cursor-text select-none duration-300 w-max" 
+      class="absolute top-1 cursor-text select-none duration-300" 
       :for="name"
     >
       {{ label }}
@@ -73,7 +73,7 @@ export default {
 .input {
   @apply
   block
-  w-max
+  w-full
   pb-0 px-4
   border-0 border-b-2 border-gray-800
   bg-transparent
