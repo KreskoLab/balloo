@@ -1,12 +1,12 @@
 <template>
-    <ul class="list-none flex space-x-8 h-full">
+    <ul class="flex flex-row items-center space-x-8 h-full">
         <li 
-            v-for="category in categories" 
-            :key="category.slug" 
-            class="flex items-center h-full font-medium pt-1 cursor-pointer border-b-2 border-transparent hover:( border-dark-500 transition duration-500)"
+            v-for="category in categoriesList"
+            :key="category.slug"
+            :class="category.slug === $route.params.id ? 'selected' : ''"
         >
             <NuxtLink :to="`/category/${category.slug}`">
-                {{ category.name_ru }}
+                {{ category.name }}
             </NuxtLink>
         </li>
     </ul>
@@ -14,13 +14,29 @@
 
 <script>
 export default {
-    async created() {
-        await this.$store.dispatch('categories/getCategories')   
-    },
-    computed: {
-        categories() {
-            return this.$store.state.categories.list
-        }
+  name: 'categories',
+  async created() {
+    await this.$store.dispatch('categories/getCategories')
+  },
+  computed: {
+    categoriesList() {
+        return this.$store.state.categories.list
     }
+  }
 }
 </script>
+
+<style scoped>
+  li {
+    @apply
+    font-medium
+    px-2 py-1
+    hover:(bg-teal-500 bg-opacity-10 rounded transition duration-300)
+  }
+
+  .selected {
+    @apply
+      bottom-0
+      border-b-2 border-dark-600
+  }
+</style>

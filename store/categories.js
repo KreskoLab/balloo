@@ -4,8 +4,9 @@ export const state = () => ({
 
 export const mutations = {
 
-    setList(state, val) {
-      state.list = val
+    setList(state, categories) {
+        state.list = categories.map(category => ({...category, name: category.name.langs.find(item => item.lang === 'ua').value}))
+        console.log(state.list, categories)
     }
 }
 
@@ -17,7 +18,7 @@ export const actions = {
             commit('setList', res)
         })
         .catch((err) => {
-            console.log('4mo');
+
         })
     }
 }
