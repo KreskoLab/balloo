@@ -7,7 +7,7 @@
                 {{ label }}
             </label>
 
-            <p class="absolute top-1 text-left pl-3 pr-5 truncate w-full">{{ view }}</p>
+            <span class="absolute block top-1 text-left pl-3 pr-5 truncate w-full">{{ view }}</span>
 
             <svg class="absolute right-1 top-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" v-if="active" />
@@ -134,11 +134,11 @@ export default {
 
 li {
     @apply
-    px-2 
+    p-2
     cursor-pointer
     select-none
     even:mt-1
-    hover:(bg-orange-400 bg-opacity-20 transition duration-300) py-2
+    hover:(bg-orange-400 bg-opacity-20 transition duration-300)
 }
 
 .fade-enter-active, .fade-leave-active {

@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@nuxt/image": "^0.6.0",
+    "@nuxt/types": "~2.15.0",
     "@windicss/animations": "^1.0.8",
     "nuxt-windicss": "^2.1.1"
   }

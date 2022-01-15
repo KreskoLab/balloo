@@ -1,10 +1,10 @@
 <template>
     <div class="relative w-full h-full">
-        <div class="w-full h-full border-2 border-dashed border-gray-600 hover:(border-orange-400)" v-if="image.length == 0">
-            <input 
-                name="dropzone"
-                type="file" 
-                class="absolute z-50 w-full h-full cursor-pointer opacity-0" 
+        <div class="w-full h-full border-2 border-dashed border-gray-600 hover:(border-orange-400)" v-if="image.length === 0">
+            <input
+                id="dropzone"
+                type="file"
+                class="absolute z-50 w-full h-full cursor-pointer opacity-0"
                 @change="handleImage($event)"
             >
 
@@ -45,7 +45,10 @@ export default {
             let reader = new FileReader()
 
             reader.readAsDataURL(file)
-            reader.onloadend = () => this.image = reader.result
+            reader.onloadend = () => {
+                this.image = reader.result
+                this.$emit('image', this.image)
+            }
         },
         remove() {
             this.image = ''

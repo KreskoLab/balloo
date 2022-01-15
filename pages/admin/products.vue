@@ -19,6 +19,7 @@
                 <AdminProductForm
                     :inputs="inputs"
                     :selects="selects"
+                    @done="create = false; add($event)"
                 />
             </div>
         
@@ -36,7 +37,7 @@ export default {
             this.selects[0].langs.forEach(lang => {
                 lang.options = res.map(subcategory => ({ 
                     filter: subcategory.filter, 
-                    option: subcategory.name.langs.find(item => item.lang == lang.lang).value 
+                    option: subcategory.name.langs.find(item => item.lang === lang.lang).value
                 })) 
             })
         })
@@ -47,14 +48,22 @@ export default {
             inputs: [
                 { 
                     name: 'title', 
+                    size: 'w-48',
                     langs: [ { lang: 'ua', label: 'Назва', value: '' }, { lang: 'ru', label: 'Название', value: '' }]
                 },
                 { 
-                    name: 'quantity', 
+                    name: 'price', 
+                    size: 'w-32',
+                    langs: [ { lang: 'ua', label: 'Ціна', value: '' }, { lang: 'ru', label: 'Цена', value: '' }]
+                },
+                { 
+                    name: 'quantity',
+                    size: 'w-32', 
                     langs: [ { lang: 'ua', label: 'Кількість', value: '' }, { lang: 'ru', label: 'Количество', value: '' }]
                 },
                 { 
-                    name: 'code', 
+                    name: 'code',
+                    size: 'w-32', 
                     langs: [ { lang: 'ua', label: 'Код товара', value: '' }, { lang: 'ru', label: 'Код товара', value: '' }]
                 }
             ],
@@ -65,6 +74,12 @@ export default {
                 }
             ]
         }
+    },
+    methods: {
+      async add(form) {
+        await this.$axios.$post('api/product', form)
+        .then(() => this.$fetch())
+      }
     }
 }
 </script>
