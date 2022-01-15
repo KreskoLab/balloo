@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col w-full space-y-4">
 
-    <div>
+    <NuxtLink to="/">
       <h1 class="font-semibold text-2xl text-center">Balloo</h1>
-    </div>
+    </NuxtLink>
 
     <div 
       v-for="item in links" 
