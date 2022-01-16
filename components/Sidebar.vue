@@ -1,13 +1,16 @@
 <template>
-    <div class="h-max px-2">
+    <aside class="h-max px-2">
         
         <div class="border-b-1 border-gray-500">
-            <Catalog />
+            <Subcategories />
         </div>
 
-        <div class="py-4">
+        <div
+            class="py-4"
+            v-if="$route.name !== 'category-id'"
+        >
             <Filters />
         </div>
 
-    </div>
+    </aside>
 </template>
