@@ -14,7 +14,7 @@ export default defineConfig({
         }
       },
       animation: {
-        border: 'border 0.5s ease-in forwards',
+        border: 'border 0.4s ease-in forwards',
       },
     }
   },
