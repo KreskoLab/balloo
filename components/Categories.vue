@@ -3,7 +3,7 @@
         <li 
             v-for="category in categoriesList"
             :key="category.slug"
-            :class="category.slug === $route.params.id ? 'selected' : ''"
+            :class="category.slug === $route.params.id ? 'selected after:(animate-border)' : ''"
         >
             <NuxtLink :to="`/category/${category.slug}`">
                 {{ category.name }}
@@ -29,14 +29,20 @@ export default {
 <style scoped>
   li {
     @apply
-    font-medium
-    px-2 py-1
-    hover:(bg-teal-500 bg-opacity-10 rounded transition duration-300)
+      h-full
+      flex relative
+      justify-center items-center
+      font-medium
+  }
+
+  a {
+    @apply
+      py-1 px-2
+      hover:(bg-teal-500 bg-opacity-10 rounded transition duration-300)
   }
 
   .selected {
     @apply
-      bottom-0
-      border-b-2 border-dark-600
+      after:(absolute content-DEFAULT bottom-0 bg-dark-600 bg-opacity-80 rounded-t-lg w-full h-1)
   }
 </style>
