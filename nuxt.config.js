@@ -53,6 +53,10 @@ export default {
     },
   },
 
+  publicRuntimeConfig: {
+    imagesURL: 'http://localhost:8000/images/'
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
