@@ -134,9 +134,10 @@ export default {
 
 li {
     @apply
-    p-2
+    py-2 px-1
     cursor-pointer
     select-none
+    truncate overflow-auto
     even:mt-1
     hover:(bg-orange-400 bg-opacity-20 transition duration-300)
 }
