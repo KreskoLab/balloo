@@ -9,7 +9,7 @@
           :key="i" 
           @click="lang = item" 
           class="focus:(outline-none)" 
-          :class="lang == item ? 'font-medium border-b-2 border-orange-400' : ''"
+          :class="lang === item ? 'font-medium border-b-2 border-orange-400' : ''"
         >
           {{ item.toUpperCase() }}
         </button>
@@ -79,9 +79,6 @@ export default {
       let number = Number(str.slice(-1)) + num
       return str.slice(0, -1) + number
     },
-    renamer(str, num) {
-      return str.slice(0, -1) + num
-    },
     addField() {    
       let new_field = JSON.parse(JSON.stringify(this.fields[this.fields.length - 1]))
       
@@ -92,26 +89,26 @@ export default {
       this.fields.push(new_field)
     },
     findLang(item) {
-      return item.langs.find(item => item.lang == this.lang)
+      return item.langs.find(item => item.lang === this.lang)
     },
     updateInput(input, text) {
-      this.fields.find(field => field.name == input.name).langs.find(item => item.lang == input.lang).value = text
+      this.fields.find(field => field.name === input.name).langs.find(item => item.lang === input.lang).value = text
     },
     updateSelect(select, subcategory) {
-      let field = this.fields.find(field => field.name == select.name)
+      let field = this.fields.find(field => field.name === select.name)
 
       if (select.multiple) {
-        let indexes = subcategory.map(item => field.langs.find(lang => lang.lang == select.lang).options.findIndex(option => option == item)) 
+        let indexes = subcategory.map(item => field.langs.find(lang => lang.lang === select.lang).options.findIndex(option => option === item))
         field.langs.forEach(lang => lang.value = [])
         indexes.forEach(index => field.langs.forEach(lang => lang.value.push(lang.options[index])))
       }
       else {
-        let index = field.langs.find(item => item.lang == select.lang).options.findIndex(option => option == subcategory)
+        let index = field.langs.find(item => item.lang === select.lang).options.findIndex(option => option === subcategory)
         field.langs.forEach(lang => lang.value = lang.options[index])
       }
     },
     removeField(name) {
-      let index = this.fields.findIndex(i => i.name == name)
+      let index = this.fields.findIndex(i => i.name === name)
       this.fields.splice(index, 1)   
     },
     submit() {
