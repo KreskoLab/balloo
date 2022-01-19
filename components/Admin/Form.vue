@@ -16,40 +16,50 @@
       </div>
     </div>
 
-    <div class="flex flex-row flex-wrap items-center gap-x-12 gap-y-10 py-12">
+    <div class="flex flex-row space-x-12 py-6">
 
-      <div v-for="item in computed_fields" :key="item.name">
-
-        <AdminInput 
-          :name="item.name"
-          :label="item.label"
-          :value="item.value"
-          :isRemovable="modified"
-          @text="updateInput(item, $event)" 
-          @remove="removeField($event)" 
-          v-if="item.type === 'input'"
+      <div class="h-96 w-1/3" v-if="image_upload">
+        <AdminImageUpload
+          @image = "file = $event"
         />
-
-        <AdminSelect
-          :label="item.label" 
-          :options="item.options"
-          :value="item.value"
-          :multiple="item.multiple"
-          @selected="updateSelect(item, $event)" 
-          v-if="item.type === 'select'"
-        />
-         
       </div>
 
-      <button class="btn font-medium" @click="addField()" v-if="modified">
+      <div class="flex flex-col space-y-12 pt-4 w-full">
+        <div class="flex flex-row flex-wrap gap-x-12 gap-y-8">
+          <div v-for="item in computed_fields" :key="item.name">
+            <AdminInput
+                :name="item.name"
+                :label="item.label"
+                :value="item.value"
+                :isRemovable="modified"
+                @text="updateInput(item, $event)"
+                @remove="removeField($event)"
+                v-if="item.type === 'input'"
+            />
+
+            <AdminSelect
+                :label="item.label"
+                :options="item.options"
+                :value="item.value"
+                :multiple="item.multiple"
+                @selected="updateSelect(item, $event)"
+                v-if="item.type === 'select'"
+            />
+          </div>
+        </div>
+
+        <button class="btn font-medium w-max" :class="image_upload ? '!mt-auto' : 'my-6'" @click="submit()">
+          Добавить
+        </button>
+      </div>
+
+      <button class="btn font-medium w-max h-max" @click="addField()" v-if="modified">
         +
       </button>
 
     </div>
 
-    <button class="btn font-medium" @click="submit()">
-      Добавить
-    </button>
+
 
   </div>
 </template>
@@ -63,6 +73,10 @@ export default {
       default: () => []
     },
     modified: {
+      type: Boolean,
+      default: false
+    },
+    image_upload: {
       type: Boolean,
       default: false
     }
@@ -121,7 +135,11 @@ export default {
 
       for (let i = 1; i < this.fields.length; i++) {
         const element = this.fields[i]
-        let filter = { name: element.name, langs: element.langs.map(({ label, options, ...rest }) => rest) }
+        let filter = {
+          name: element.name,
+          langs: element.langs.map(({ label, options, ...rest }) => rest),
+          image: this.file
+        }
         form.body.push(filter)
       }
 
@@ -132,6 +150,7 @@ export default {
     return {
       lang: 'ua',
       langs: ['ua', 'ru'],
+      file: '',
       fields: JSON.parse(JSON.stringify(this.schema))
     }
   }
