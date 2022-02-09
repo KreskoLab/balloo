@@ -2,28 +2,35 @@
     <div class="w-full h-screen bg-light-100 overflow-auto">
 
         <div class="hidden sm:block">
-            <Navbar />
+          <Header />
         </div>
 
         <div>
-            <Header />
+          <Navbar />
         </div>
 
-        <div class="h-full flex flex-row sm:(space-x-12 pt-12 px-2)">
+        <div class="flex flex-row my-3 sm:(space-x-12 my-6 px-2)">
 
-            <div class="hidden sm:(block w-full w-1/4) pl-4">
-                <Sidebar />
-            </div>
+          <div class="hidden sm:(block w-full w-1/4) pl-4" v-if="$route.name !== 'index'">
+            <Sidebar />
+          </div>
 
-            <div class="flex flex-col w-full">
-
-                <div class="my-2 px-4">
-                    <Nuxt />
-                </div>
-
-            </div>
+          <div class="w-full px-4">
+            <Nuxt />
+          </div>
 
         </div>
 
     </div>
 </template>
+
+<style>
+  .page-enter-active,
+  .page-leave-active {
+    transition: opacity 0.3s;
+  }
+  .page-enter,
+  .page-leave-to {
+    opacity: 0;
+  }
+</style>

@@ -20,6 +20,7 @@
 
       <div class="h-96 w-1/3" v-if="image_upload">
         <AdminImageUpload
+          :imageURL="image"
           @image = "file = $event"
         />
       </div>
@@ -79,6 +80,10 @@ export default {
     image_upload: {
       type: Boolean,
       default: false
+    },
+    image: {
+      type: String,
+      default: ''
     }
   },
   computed: {
@@ -134,13 +139,16 @@ export default {
       }
 
       for (let i = 1; i < this.fields.length; i++) {
-        const element = this.fields[i]
-        let filter = {
-          name: element.name,
-          langs: element.langs.map(({ label, options, ...rest }) => rest),
-          image: this.file
+        let item = {
+          name: this.fields[i].name,
+          langs: this.fields[i].langs.map(({ label, options, ...rest }) => rest)
         }
-        form.body.push(filter)
+
+        if (this.image_upload) {
+          item.image = this.file
+          item.old_image = this.image
+        }
+        form.body.push(item)
       }
 
       this.$emit('done', form)
@@ -148,8 +156,8 @@ export default {
   },
   data() {
     return {
-      lang: 'ua',
-      langs: ['ua', 'ru'],
+      lang: 'uk',
+      langs: ['uk', 'ru'],
       file: '',
       fields: JSON.parse(JSON.stringify(this.schema))
     }

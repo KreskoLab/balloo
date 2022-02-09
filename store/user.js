@@ -24,8 +24,8 @@ export const actions = {
       commit('setLoggedIn', true)
     })
     .catch((err) => {
-      commit('setUser', {})
       commit('setLoggedIn', false)
+      commit('setUser', {})
     })
   },
 

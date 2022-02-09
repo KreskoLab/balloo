@@ -1,5 +1,6 @@
 export const state = () => ({
-    list: []
+    list: [],
+    subcategory: {}
 }) 
 
 export const mutations = {
@@ -7,20 +8,30 @@ export const mutations = {
     setList(state, categories) {
         state.list = categories.map(category => ({
             ...category,
-            name: category.name.langs.find(item => item.lang === 'ua').value,
-            subcategories: category.subcategories.map(({_id, products, name}) => ({
-                _id,
-                products: products.length,
-                name: name.langs.find(item => item.lang === 'ua').value
+            name: category.name.value,
+            subcategories: category.subcategories.map(({ products, name, ...rest }) => ({
+                ...rest,
+                name: name.value,
+                products: products.length
             }))
         }))
+    },
+
+    setSubcategory(state, slug) {
+        for (const category of state.list) {
+            let subcategory = category.subcategories.find(subcategory => subcategory.slug === slug)
+
+            if (subcategory) {
+                state.subcategory = subcategory
+            }
+        }
     }
 }
 
 export const actions = {
 
     async getCategories({ commit }) {
-        await this.$axios.$get('api/categories?populate=subcategories')
+        await this.$axios.$get('api/categories')
         .then((res) => {
             commit('setList', res)
         })
@@ -46,5 +57,29 @@ export const getters = {
         } else {
             return {}
         }
+    },
+
+    getSubcategory: (state) => {
+        return state.subcategory
+    },
+
+    getSubcategoryBySlug: (state) => slug => {
+        for (const category of state.list) {
+            let subcategory = category.subcategories.find(subcategory => subcategory.slug === slug)
+
+            if (subcategory) {
+                return subcategory
+            }
+        }
+    },
+
+    getSubcategories: (state) => {
+        let list_copy = JSON.parse(JSON.stringify(state.list))
+
+        list_copy.forEach((category, index, arr) => {
+            arr[index].subcategories = category.subcategories.map(subcategory => ({...subcategory, category: category.slug}))
+        })
+
+        return list_copy.map(category => category.subcategories).flat()
     }
 }

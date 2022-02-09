@@ -6,6 +6,8 @@
       <div v-for="subcategory in subcategories" :key="subcategory.slug">
         <Card
           :name="subcategory.name"
+          :slug="subcategory.slug"
+          :category="subcategory.category"
           :image="subcategory.image"
         />
       </div>
@@ -16,11 +18,8 @@
 
 <script>
 export default {
-  async fetch() {
-    await this.$axios.$get('api/subcategories')
-    .then((res) => {
-      this.subcategories = res.map(({name, slug, image}) => ({name: name.langs[0].value, slug, image}))
-    })
+  created() {
+    this.subcategories = this.$store.getters['categories/getSubcategories']
   },
   data() {
     return {

@@ -1,6 +1,6 @@
 <template>
     <div v-click-outside="close" class="relative">
-        
+
         <button @click.prevent="show()" class="w-full select" :class="select_border">
 
             <label class="absolute flex justify-start top-1" :class="[label_class, label_focus]">
@@ -19,13 +19,13 @@
 
         <transition name="fade">
             <ul class="absolute w-full bg-light-50 shadow-sm z-10 mt-1" v-if="active">
-                <li 
-                    v-for="option in options" 
+                <li
+                    v-for="option in options"
                     :key="option"
                     :class="selected.includes(option) ? 'bg-orange-400 bg-opacity-20' : ''"
                     @click="selectOption(option)"
                 >
-                    {{ option }} 
+                    {{ option }}
                 </li>
             </ul>
         </transition>
@@ -77,16 +77,20 @@ export default {
         }
     },
     watch: {
-        value(new_value) {
+        value: {
+          immediate: true,
+          handler(new_value) {
             if (!this.selected.includes(new_value)) {
-                this.clear()
-                
-                if (Array.isArray(new_value)) {
-                    new_value.forEach(item => this.selected.push(item))
-                } else {
-                    this.selected.push(new_value)
-                }
+              this.clear()
+
+              if (Array.isArray(new_value)) {
+                new_value.forEach(item => this.selected.push(item))
+              } else {
+                this.selected.push(new_value)
+              }
             }
+          }
+
         }
     },
     methods: {
@@ -130,7 +134,7 @@ export default {
   hover:(cursor-pointer)
   py-4
   min-w-48
-} 
+}
 
 li {
     @apply

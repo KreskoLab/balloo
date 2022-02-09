@@ -1,6 +1,6 @@
 <template>
     <ul class="flex flex-row items-center space-x-8 h-full">
-        <li 
+        <li
             v-for="category in categoriesList"
             :key="category.slug"
             :class="category.slug === $route.params.id ? 'selected after:(animate-border)' : ''"
@@ -15,12 +15,9 @@
 <script>
 export default {
   name: 'categories',
-  async created() {
-    await this.$store.dispatch('categories/getCategories')
-  },
   computed: {
     categoriesList() {
-        return this.$store.state.categories.list
+      return this.$store.state.categories.list
     }
   }
 }
@@ -38,7 +35,8 @@ export default {
   a {
     @apply
       py-1 px-2
-      hover:(bg-teal-500 bg-opacity-10 rounded transition duration-300)
+      transition duration-200
+      hover:(bg-teal-500 bg-opacity-10 rounded)
   }
 
   .selected {

@@ -1,18 +1,26 @@
 <template>
     <div>
         
-      <div class="flex flex-row justify-between">
-          <h2 class="text-2xl font-medium">{{category.name}}</h2>
+      <div class="flex flex-row justify-between items-center">
+          <h2 class="text-2xl font-medium">{{ category.name }}</h2>
 
           <div class="font-medium">
               дешевші
           </div>
       </div>
 
-      <Card
-        :name="products[0].name"
-      />
-        
+      <div class="grid grid-cols-2 gap-x-4 gap-y-4 my-8 sm:(grid-cols-3 gap-x-8 gap-y-4)" v-if="!$fetchState.pending">
+        <div
+            v-for="product in products"
+            :key="product._id"
+        >
+          <Product
+            :name="product.name"
+            :image="product.image"
+            :price="product.price"
+          />
+        </div>
+      </div>
 
     </div>
 </template>
@@ -22,7 +30,7 @@ export default {
   async fetch() {
     await this.$axios.$get(`api/products?${this.subcategories_query}`)
     .then((res) => {
-      this.products = res.map(product => ({ ...product, name: product.name.find(item => item.lang === 'ua').value}))
+      this.products = res.map(product => ({ ...product, name: product.name.value}))
     })
   },
   data() {

@@ -3,7 +3,7 @@ export default {
   head: {
     title: 'balloo',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'uk'
     },
     meta: [
       { charset: 'utf-8' },
@@ -23,7 +23,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-
+    { src: '~/plugins/persistedState.js' },
+    { src: '~/plugins/axios.js' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -31,7 +32,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    'nuxt-windicss',
+    'nuxt-windicss'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

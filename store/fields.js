@@ -5,7 +5,7 @@ export const state = () => ({
             name: 'input_1',
             type: 'input',
             langs: [
-                { lang: 'ua', label: '', value: '' },
+                { lang: 'uk', label: '', value: '' },
                 { lang: 'ru', label: '', value: '' }
             ]
         },
@@ -15,7 +15,7 @@ export const state = () => ({
             type: 'select',
             multiple: false,
             langs: [
-              { lang: 'ua', label: '', value: '', options: [] },
+              { lang: 'uk', label: '', value: '', options: [] },
               { lang: 'ru', label: '', value: '', options: [] }
             ]
         }
@@ -72,8 +72,12 @@ export const mutations = {
 
         select.langs.forEach(lang => {
             lang.options = payload.map(option => {
-              return option.name.langs.find(item => item.lang == lang.lang).value
+              return option.name.langs.find(item => item.lang === lang.lang).value
             })
         })
+    },
+
+    updateSchema(state, payload) {
+        state.schema = payload
     }
 }
