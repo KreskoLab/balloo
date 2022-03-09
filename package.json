@@ -11,6 +11,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/proxy": "^2.1.0",
+    "@windicss/plugin-scrollbar": "^1.2.3",
     "cookie": "^0.4.1",
     "core-js": "^3.19.3",
     "js-cookie": "^3.0.1",
@@ -26,6 +27,6 @@
     "@nuxt/image": "^0.6.0",
     "@nuxt/types": "~2.15.0",
     "@windicss/animations": "^1.0.8",
-    "nuxt-windicss": "^2.1.1"
+    "nuxt-windicss": "^2.2.8"
   }
 }

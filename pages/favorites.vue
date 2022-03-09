@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="page">
     <h1 class="text-2xl font-semibold">{{title}}</h1>
     <h2 class="text-dark-200 font-medium mt-4">{{subtitle}}</h2>
 

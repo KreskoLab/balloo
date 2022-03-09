@@ -41,6 +41,6 @@ export default {
 
   .selected {
     @apply
-      after:(absolute content-DEFAULT bottom-0 bg-dark-600 bg-opacity-80 rounded-t-lg w-full h-1)
+      after:(absolute content-DEFAULT bottom-0 bg-green-400 bg-opacity-70 w-full h-1)
   }
 </style>

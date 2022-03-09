@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full py-4">
+  <div class="page">
 
     <div class="grid grid-cols-2 gap-x-6 gap-y-4 sm:(grid-cols-4 gap-x-12 gap-y-6)">
 

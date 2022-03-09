@@ -6,7 +6,7 @@
         <div>
             <div
                 class="py-3"
-                v-for="item in filters"
+                v-for="item in filtersList"
                 :key="item.name"
             >
               <h3 class="font-medium pb-1">{{item.name}}</h3>
@@ -14,16 +14,16 @@
               <div
                   class="flex items-center py-1"
                   v-for="filter in item.filters"
-                  :key="filter"
+                  :key="filter.value"
               >
                 <input
-                    class="text-dark-500 outline-none appearance-none w-6 h-6 border-2 border-dark-500 cursor-pointer focus:(ring-transparent ring-0 border-dark-500)"
+                    class="text-dark-500 outline-none appearance-none w-6 h-6 border-2 border-dark-500 rounded-sm cursor-pointer focus:(ring-transparent ring-0 border-dark-500)"
                     type="checkbox"
                     :id="filter"
-                    :value="{value: filter, filter: item.slug}"
+                    :value="{value: filter.value, filter: filter.slug}"
                     v-model="activeFilters"
                 >
-                <label class="select-none cursor-pointer ml-2" :for="filter">{{filter}}</label>
+                <label class="select-none cursor-pointer ml-2" :for="filter">{{filter.name}}</label>
               </div>
 
             </div>
@@ -47,7 +47,7 @@ export default {
     subcategoryID() {
       return this.$store.getters['categories/getSubcategoryBySlug'](this.$route.params.subcategory)._id
     },
-    filters() {
+    filtersList() {
       return this.$store.state.filters.list
     }
   },
