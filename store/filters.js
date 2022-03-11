@@ -23,7 +23,6 @@ export const mutations = {
         let localCopy = JSON.parse(JSON.stringify(state.listCopy))
 
         state.list = localCopy.map((item) => {
-            console.log(item)
             item.filters = item.filters.filter(element => {
                 return newFilters.some(filter => filter.value_slug === element.value)
                     || state.active.every(active => item.filters.some(fil => fil.value === active.value))

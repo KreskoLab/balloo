@@ -6,7 +6,7 @@
       </div>
 
       <div
-        class="py-2"
+        class="h-10/12 py-2"
         v-if="$route.name === 'category-id-subcategory' || $route.name === 'category-id-subcategory-product-page'"
       >
         <Filters />

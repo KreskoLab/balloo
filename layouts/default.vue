@@ -7,13 +7,18 @@
       </div>
 
       <div class="flex container mx-auto !max-w-screen-2xl h-screen pt-20 lg:(pt-30)">
-        <div class="hidden sm:(block w-1/4 pt-6 px-6)" v-if="$route.name !== 'index' && $route.name !== 'favorites'">
+
+        <div
+            class="hidden sm:(block w-1/4 pt-6 px-6 overflow-y-auto overflow-x-hidden)"
+            v-if="$route.name !== 'index' && $route.name !== 'favorites'"
+        >
           <Sidebar />
         </div>
 
-        <div class="relative w-full h-full max-w-full max-h-full overflow-hidden">
+        <div class="relative w-full h-full overflow-hidden">
           <Nuxt />
           <Cart />
+          <FiltersSheet />
         </div>
       </div>
 
@@ -34,9 +39,6 @@
 <script>
 export default {
   computed: {
-    showCart() {
-      return this.$store.state.cart.show
-    },
     showHamburgerMenu() {
       return this.$store.state.showHamburgerMenu
     }

@@ -1,33 +1,44 @@
 <template>
-    <div class="w-full">
-        
-        <h2 class="font-semibold text-xl">фильтры</h2>
+    <div class="flex flex-col w-full h-full">
 
-        <div>
-            <div
-                class="py-3"
-                v-for="item in filtersList"
-                :key="item.name"
+      <div>
+        <p class="font-semibold text-xl">фильтры</p>
+      </div>
+
+      <div
+          class="basis-1/5 mt-3"
+          v-for="item in filtersList"
+          :key="item.name"
+      >
+        <h3 class="font-medium pb-1">{{item.name}}</h3>
+
+        <transition-group
+            class="list-none"
+            name="slide-fade"
+            tag="ul"
+        >
+          <li
+              class="flex items-center py-1"
+              v-for="filter in item.filters"
+              :key="filter.value"
+          >
+            <input
+                class="text-dark-500 outline-none appearance-none w-6 h-6 border-2 border-dark-500 rounded-sm cursor-pointer focus:(ring-transparent ring-0 border-dark-500)"
+                type="checkbox"
+                :id="filter.value + id"
+                :value="{value: filter.value, filter: filter.slug}"
+                v-model="activeFilters"
             >
-              <h3 class="font-medium pb-1">{{item.name}}</h3>
+            <label
+                class="cursor-pointer select-none ml-2"
+                :for="filter.value + id"
+            >
+              {{filter.name}}
+            </label>
+          </li>
+        </transition-group>
 
-              <div
-                  class="flex items-center py-1"
-                  v-for="filter in item.filters"
-                  :key="filter.value"
-              >
-                <input
-                    class="text-dark-500 outline-none appearance-none w-6 h-6 border-2 border-dark-500 rounded-sm cursor-pointer focus:(ring-transparent ring-0 border-dark-500)"
-                    type="checkbox"
-                    :id="filter"
-                    :value="{value: filter.value, filter: filter.slug}"
-                    v-model="activeFilters"
-                >
-                <label class="select-none cursor-pointer ml-2" :for="filter">{{filter.name}}</label>
-              </div>
-
-            </div>
-        </div>
+      </div>
 
     </div>
 </template>
@@ -35,6 +46,12 @@
 <script>
 export default {
   name: 'filters',
+  props: {
+    id: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
       activeFilters: []
@@ -76,3 +93,16 @@ export default {
   }
 }
 </script>
+
+<style>
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+</style>
