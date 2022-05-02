@@ -1,22 +1,32 @@
 <template>
-  <div class="w-full h-full bg-red-300">
-    debil
+  <div class="lg:(ml-[320px])">
+    <transition
+      enter-active-class="animate-animated animate-faster animate-slideInRight"
+      leave-active-class="animate-animated animate-faster animate-slideOutRight"
+      mode="out-in"
+      appear
+      @after-leave="leave"
+    >
+      <TheProductPage
+        v-if="show"
+        @hide="show = false"
+      />
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
-  // async fetch() {
-  //   this.product = await this.$axios.$get(`api/product/${this.$route.params.id}`)
-  // },
-  // data() {
-  //   return {
-  //     product: {}
-  //   }
-  // }
+  data() {
+    return {
+      show: true,
+    }
+  },
+
+  methods: {
+    leave() {
+      this.$router.push(`/category/${this.$route.params.id}/${this.$route.params.subcategory}`)
+    },
+  },
 }
 </script>
-
-<style scoped>
-
-</style>
