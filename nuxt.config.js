@@ -35,14 +35,15 @@ export default {
 
   proxy: {
     '/api': {
-      target: 'http://localhost:8000', // of course, you can use process.env here!
+      target: process.env.API_URL, // of course, you can use process.env here!
       pathRewrite: { '^/api': '/' },
       changeOrigin: true,
     },
   },
 
   publicRuntimeConfig: {
-    imagesURL: 'http://localhost:8000/images/',
+    imagesURL: process.env.IMAGES_URL,
+    apiURL: process.env.API_URL
   },
 
   windicss: {
