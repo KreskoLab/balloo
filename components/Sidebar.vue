@@ -1,30 +1,32 @@
 <template>
-    <aside class="h-full px-2">
-        
-      <div :class="subcategories_class">
-        <Subcategories />
-      </div>
+  <aside
+    class="hidden lg:(block fixed z-50 h-[calc(100%-7.5rem)] top-30 bg-amber-50 py-6 w-[320px] flex-none pl-6 overflow-y-auto overflow-x-hidden border-r-2 border-dark-600)"
+  >
+    <div :class="subcategories_class">
+      <SidebarSubcategoriesList />
+    </div>
 
-      <div
-        class="h-10/12 py-2"
-        v-if="$route.name === 'category-id-subcategory' || $route.name === 'category-id-subcategory-product-page'"
-      >
-        <Filters />
-      </div>
-
-    </aside>
+    <div
+      v-if="$route.name === 'category-id-subcategory' || $route.name === 'category-id-subcategory-product-page'"
+      class="h-full py-2"
+    >
+      <SidebarFiltersList />
+    </div>
+  </aside>
 </template>
 
 <script>
 export default {
-  name: 'sidebar',
+  name: 'SideBar',
   computed: {
     subcategories_class() {
-      if (this.$route.name === 'category-id-subcategory' || this.$route.name === 'category-id-subcategory-product-page') {
+      if (
+        this.$route.name === 'category-id-subcategory' ||
+        this.$route.name === 'category-id-subcategory-product-page'
+      ) {
         return 'border-b-1 border-gray-500 w-11/12'
-      }
-      else return ''
-    }
-  }
+      } else return ''
+    },
+  },
 }
 </script>
