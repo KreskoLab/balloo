@@ -1221,7 +1221,7 @@
     node-html-parser "^3.2.0"
     ufo "^0.7.4"
 
-"@nuxt/image@^0.6.2":
+"@nuxt/image@^0.6.0":
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/@nuxt/image/-/image-0.6.2.tgz#983247dbedf3d1eb653685635365bb24396aea49"
   integrity sha512-2Q4Atp/vceHKHMarKnLdy+z4zAaYCWy0wrK2G1tjrmhXOhhJZ5PhqURodlBu2Qb8wAMZKrm2c48rM58tFR7XYA==
