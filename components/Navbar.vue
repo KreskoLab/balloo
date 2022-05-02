@@ -96,7 +96,7 @@
       <a
         v-if="!loggedIn"
         class="flex items-center space-x-2"
-        href="http://localhost:8000/login"
+        :href="`${$config.apiURL}/login`"
       >
         <svg
           class="hidden lg:block h-7 w-7"
