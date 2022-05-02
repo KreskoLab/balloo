@@ -1,7 +1,7 @@
 import { defineConfig } from 'windicss/helpers'
 
 export default defineConfig({
-  attributify: false,
+  attributify: true,
   extract: {
     include: ['**/*.{vue,html,jsx,tsx}'],
     exclude: ['node_modules', '.git'],
@@ -12,15 +12,16 @@ export default defineConfig({
         border: {
           '0%': { transform: 'scale(0,0)' },
           '100%': { transform: 'scale(1,1)' },
-        }
+        },
       },
       animation: {
         border: 'border 0.4s ease-in forwards',
       },
-    }
+    },
   },
   shortcuts: {
-    "page": "px-4 pt-6 lg:(pt-6 px-6)"
+    page: 'px-4 pt-6 lg:(pt-6 px-6)',
+    lang: 'transition-all duration-200 w-12 decoration-3 decoration-transparent underline underline-offset-3 hover:(decoration-dark-600)',
   },
   plugins: [
     require('windicss/plugin/forms'),
@@ -34,6 +35,6 @@ export default defineConfig({
         bounceOutSpeed: 750,
         animationDelaySpeed: 0,
       },
-    })
-  ]
+    }),
+  ],
 })
