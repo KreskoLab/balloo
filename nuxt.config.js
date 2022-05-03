@@ -34,16 +34,16 @@ export default {
   },
 
   proxy: {
-    '/api': {
-      target: process.env.API_URL, // of course, you can use process.env here!
-      pathRewrite: { '^/api': '/' },
+    '/api/': {
+      target: process.env.BACKEND_URL, // of course, you can use process.env here!
+      pathRewrite: { '^/api/': '' },
       changeOrigin: true,
     },
   },
 
   publicRuntimeConfig: {
     imagesURL: process.env.IMAGES_URL,
-    apiURL: process.env.API_URL,
+    apiURL: process.env.BACKEND_URL,
   },
 
   windicss: {
