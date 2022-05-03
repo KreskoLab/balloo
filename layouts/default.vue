@@ -24,7 +24,7 @@
       appear
     >
       <div
-        v-if="showHamburgerMenu"
+        v-show="showHamburgerMenu"
         class="absolute top-0 w-full h-full lg:(hidden)"
       >
         <TheHamburgerMenu />
