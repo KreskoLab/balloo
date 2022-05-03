@@ -69,6 +69,10 @@ export default {
     strategy: 'no_prefix',
   },
 
+  image: {
+    domains: [process.env.BACKEND_DOMAIN],
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }
