@@ -70,6 +70,7 @@ export default {
   },
 
   image: {
+    provider: 'ipx',
     domains: [process.env.BACKEND_DOMAIN],
   },
 
