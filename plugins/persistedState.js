@@ -4,7 +4,7 @@ import cookie from 'cookie'
 
 export default ({ store, req }) => {
   createPersistedState({
-    paths: ['language', 'favorites', 'cart'],
+    paths: ['favorites', 'cart'],
     storage: {
       getItem: (key) => {
         if (process.server) {
