@@ -17,8 +17,8 @@
       >
         <div class="flex h-full px-6">
           <div class="flex flex-col space-y-3 mt-2">
-            <SidebarSubcategoriesList />
-            <SidebarFiltersList />
+            <SideBarSubcategoriesList />
+            <SideBarFiltersList />
           </div>
 
           <div
