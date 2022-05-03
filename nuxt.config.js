@@ -18,7 +18,7 @@ export default {
   css: ['@/assets/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/persistedState.js' }, { src: '~/plugins/axios.js' }],
+  plugins: [{ src: '~/plugins/persistedState.js', mode: 'client' }, { src: '~/plugins/axios.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,7 +43,7 @@ export default {
 
   publicRuntimeConfig: {
     imagesURL: process.env.IMAGES_URL,
-    apiURL: process.env.API_URL
+    apiURL: process.env.API_URL,
   },
 
   windicss: {
