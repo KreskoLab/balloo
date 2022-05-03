@@ -3,14 +3,14 @@
     class="hidden lg:(block fixed z-50 h-[calc(100%-7.5rem)] top-30 bg-amber-50 py-6 w-[320px] flex-none pl-6 overflow-y-auto overflow-x-hidden border-r-2 border-dark-600)"
   >
     <div :class="subcategories_class">
-      <SidebarSubcategoriesList />
+      <SideBarSubcategoriesList />
     </div>
 
     <div
       v-if="$route.name === 'category-id-subcategory' || $route.name === 'category-id-subcategory-product-page'"
       class="h-full py-2"
     >
-      <SidebarFiltersList />
+      <SideBarFiltersList />
     </div>
   </aside>
 </template>
