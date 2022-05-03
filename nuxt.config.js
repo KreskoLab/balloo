@@ -73,6 +73,10 @@ export default {
     domains: [process.env.BACKEND_DOMAIN],
   },
 
+  serverMiddleware: {
+    '/_ipx': '~/server/middleware/ipx.js',
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }
