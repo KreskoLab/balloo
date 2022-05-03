@@ -39,5 +39,8 @@
     "eslint-plugin-vue": "^8.7.1",
     "nuxt-windicss": "^2.3.1",
     "prettier": "^2.6.2"
+  },
+  "resolutions": {
+    "sharp": "0.27.0"
   }
 }
