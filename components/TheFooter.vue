@@ -35,7 +35,9 @@
       >
         мова
       </span>
+
       <span class="mx-2">|</span>
+
       <span
         class="lang"
         :class="{ 'font-medium': $i18n.locale === 'ru' }"
