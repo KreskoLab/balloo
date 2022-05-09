@@ -92,7 +92,7 @@
 
 <script>
 export default {
-  name: 'HamburgerMenu',
+  name: 'TheHamburgerMenu',
   computed: {
     categories() {
       return this.$store.state.categories.list
@@ -105,15 +105,21 @@ export default {
     showCart() {
       return this.$store.state.cart.show
     },
+
+    showHamburger() {
+      return this.$store.state.showHamburgerMenu
+    },
   },
 
   watch: {
     $route(to, from) {
-      this.hideBurgerMenu()
+      if (this.showHamburger) {
+        this.hideBurgerMenu()
+      }
     },
 
     showCart(show) {
-      if (show) this.hideBurgerMenu()
+      if (show && this.showHamburger) this.hideBurgerMenu()
     },
   },
 
