@@ -11,7 +11,7 @@
           <div class="font-medium">дешевші</div>
 
           <svg
-            class="transform rotate-90 h-6 w-6 sm:(hidden)"
+            class="transform rotate-90 h-6 w-6 md:(hidden)"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
