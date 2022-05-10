@@ -21,7 +21,8 @@ export const actions = {
         commit('setUser', res)
         commit('setLoggedIn', true)
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         commit('setLoggedIn', false)
         commit('setUser', {})
       })
