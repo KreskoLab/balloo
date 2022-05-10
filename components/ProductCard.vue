@@ -14,9 +14,10 @@
 
       <nuxt-img
         class="hover:(cursor-pointer) rounded"
+        provider="cloudinary"
         width="512"
         height="512"
-        :src="$config.imagesURL + image"
+        :src="image"
         :alt="name"
         format="webp"
       />
