@@ -50,13 +50,12 @@
             v-for="category in categories"
             :key="category.slug"
           >
-            {{ category.name }}
+            <NuxtLink :to="`/category/${category.slug}`"> {{ category.name }} </NuxtLink>
           </li>
         </ul>
       </div>
 
       <ul class="font-medium text-xl cursor-pointer mt-2 space-y-2">
-        <li>Опалата и доставка</li>
         <li v-if="loggedIn">Мои заказы</li>
         <li v-if="loggedIn">Настройки</li>
       </ul>
