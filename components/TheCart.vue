@@ -38,13 +38,14 @@
           class="flex flex-col space-y-8 h-full overflow-y-auto px-8 pt-4"
         >
           <div
-            v-for="product in cartProducts"
+            v-for="product in products"
             :key="product.slug"
             class="relative flex flex-row after:(content-DEFAULT absolute -bottom-4 w-full h-0.3 bg-gray-200)"
           >
             <nuxt-img
-              :src="$config.imagesURL + product.image"
+              :src="product.image[0]"
               :alt="product.name"
+              provider="cloudinary"
               class="lg:rounded"
               format="webp"
               width="96"
@@ -57,6 +58,9 @@
               <CartNumberInput
                 :id="product._id"
                 :count="product.amount"
+                :max-count="product.quantity"
+                @inc="product.amount++"
+                @dec="product.amount--"
               />
             </div>
 
@@ -68,7 +72,7 @@
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                @click="del(product._id)"
+                @click="del(product.slug)"
               >
                 <path
                   stroke-linecap="round"
@@ -82,7 +86,7 @@
         </div>
 
         <div
-          v-if="cartProducts.length > 0"
+          v-if="products.length > 0"
           class="px-8"
         >
           <div class="flex justify-between my-4">
@@ -104,6 +108,22 @@
 <script>
 export default {
   name: 'TheCart',
+
+  data() {
+    return {
+      products: [],
+    }
+  },
+
+  async fetch() {
+    if (this.cartProducts.length) {
+      const slugs = this.cartProducts.map((product) => `slugs=${product.slug}`).join('&')
+      this.products = await this.$axios
+        .$get(`api/products?${slugs}`)
+        .then((res) => res.map((product) => ({ ...product, amount: 1 })))
+    }
+  },
+
   computed: {
     showCart() {
       return this.$store.state.cart.show
@@ -114,7 +134,7 @@ export default {
     },
 
     total() {
-      return this.$store.getters['cart/summary']
+      return this.products.reduce((total, cv) => total + Number(cv.price) * Number(cv.amount), 0)
     },
   },
 
@@ -123,8 +143,11 @@ export default {
       this.$store.commit('cart/showCart')
     },
 
-    del(id) {
-      this.$store.commit('cart/removeFromCart', id)
+    del(productSlug) {
+      const index = this.products.indexOf((product) => product.slug === productSlug)
+      this.products.splice(index, 1)
+
+      this.$store.commit('cart/removeFromCart', productSlug)
     },
   },
 }

@@ -21,16 +21,25 @@ export default {
       type: Number,
       default: 1,
     },
+
+    maxCount: {
+      type: Number,
+      default: 1,
+    },
   },
 
   methods: {
     inc() {
-      this.$store.commit('cart/incAmount', this.id)
+      if (this.count < this.maxCount) {
+        this.$emit('inc')
+        // this.$store.commit('cart/incAmount', this.id)
+      }
     },
 
     dec() {
       if (this.count !== 1) {
-        this.$store.commit('cart/decAmount', this.id)
+        this.$emit('dec')
+        // this.$store.commit('cart/decAmount', this.id)
       }
     },
   },

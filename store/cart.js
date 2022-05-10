@@ -4,38 +4,22 @@ export const state = () => ({
 })
 
 export const mutations = {
-  addToCart(state, item) {
-    const product = state.list.find(({ _id }) => _id === item._id)
+  addToCart(state, productSlug) {
+    const product = state.list.find((item) => item.slug === productSlug)
 
     if (product) {
       product.amount++
     } else {
-      state.list.push({ ...item, amount: 1 })
+      state.list.push({ slug: productSlug })
     }
   },
 
-  incAmount(state, id) {
-    const product = state.list.find(({ _id }) => _id === id)
-    product.amount++
-  },
-
-  decAmount(state, id) {
-    const product = state.list.find(({ _id }) => _id === id)
-    product.amount--
-  },
-
-  removeFromCart(state, id) {
-    const index = state.list.indexOf((item) => item._id === id)
+  removeFromCart(state, productSlug) {
+    const index = state.list.indexOf((item) => item.slug === productSlug)
     state.list.splice(index, 1)
   },
 
   showCart(state) {
     state.show = !state.show
-  },
-}
-
-export const getters = {
-  summary(state) {
-    return state.list.reduce((total, cv) => total + Number(cv.price) * Number(cv.amount), 0)
   },
 }
