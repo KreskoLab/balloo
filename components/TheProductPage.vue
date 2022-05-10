@@ -1,82 +1,74 @@
 <template>
   <div
-    class="fixed overflow-y-auto top-10 pb-4 h-[calc(100%-2.5rem)] lg:(top-30 h-[calc(100%-7.5rem)] pb-0 border-r-2 border-b-2 border-l-2 border-dark-600) w-full bg-light-50"
+    class="fixed flex overflow-y-auto top-20 w-full h-[calc(100%-5rem)] lg:(top-30 h-[calc(100%-7.5rem)] w-[calc(100%-320px)] border-r-2 border-b-2 border-l-2 border-dark-600) bg-light-50"
   >
+    <UiButton
+      color="bg-transparent"
+      size="px-3 py-1"
+      class="hidden lg:(absolute block w-max h-max flex-grow-0 top-5 left-5)"
+      @click.native="hide()"
+    >
+      X
+    </UiButton>
+
     <div
       v-if="!$fetchState.pending"
-      class="flex flex-col lg:(flex-row py-8 px-6)"
+      class="flex flex-col w-full h-full pt-4 lg:(px-16)"
     >
-      <UiButton
-        color="bg-transparent"
-        size="px-3 py-1"
-        class="w-max top-14 left-4 lg:(h-max flex-grow-0 top-0 left-0 mr-4) xl:(h-max flex-grow-0 top-0 left-0 mr-16)"
-        @click.native="hide()"
-      >
-        X
-      </UiButton>
+      <h1 class="text-2xl tracking-widest self-center font-medium lg:(text-3xl)">
+        {{ product.name }}
+      </h1>
 
-      <nuxt-img
-        :src="$config.imagesURL + product.image"
-        class="lg:rounded"
-        format="webp"
-        width="800"
-        height="800"
-        sizes="sm:100vw md:100vw lg:120px xl:120px xxl:160px"
-      />
+      <div class="flex flex-col lg:(flex-row space-x-24 px-12)">
+        <div class="mx-auto lg:mx-0">
+          <UiSlider :images="product.image" />
+        </div>
 
-      <div class="w-full px-4 mt-3 lg:ml-2 xl:(ml-24 w-full px-0 pt-0)">
-        <h1 class="text-2xl text-center font-medium lg:(text-left text-3xl)">
-          {{ product.name }}
-        </h1>
-
-        <div class="flex items-center justify-center space-x-12 mt-4 lg:(justify-start space-x-24)">
-          <div
-            class="relative px-6 w-max before:(absolute content-DEFAULT inset-x-1 bg-teal-300 bg-opacity-80 w-full h-full transform -skew-y-3)"
-          >
-            <span class="relative text-xl font-medium"> ₴ {{ product.price.toFixed(2) }} </span>
+        <div class="flex flex-col py-6 space-y-4 items-center lg:(py-8 space-y-6 items-start)">
+          <div class="rounded-full bg-blue-200 w-max px-6 py-2">
+            <span class="font-semibold text-lg text-dark-200">{{ product.price.toFixed(2) }} ₴</span>
           </div>
 
-          <FavoriteIcon
-            :is-fill="isFavorite(product.slug)"
-            size="w-10 h-10"
-            @click.native="addFavorite(product.slug)"
-          />
-        </div>
+          <div>
+            <p class="font-medium text-center lg:(text-left)">{{ product.description }}</p>
 
-        <div class="mt-6 w-10/12 mx-auto lg:(w-72 mx-0)">
-          <UiButton @click.native="addToCart()">
-            <template #icon>
-              <svg
-                class="h-7 w-7"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <ul class="flex flex-row space-x-2 mt-3">
+              <li
+                v-for="property in product.properties"
+                :key="property.slug"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                />
-              </svg>
-            </template>
-            В корзину
-          </UiButton>
-        </div>
+                {{ property.name }}:
+                <span class="font-normal ml-1">{{ property.value }}.</span>
+              </li>
+            </ul>
+          </div>
 
-        <div class="mt-5">
-          <p>{{ product.description }}</p>
+          <div class="flex space-x-6 w-10/12 lg:(w-max)">
+            <UiButton @click.native="addToCart()">
+              <template #icon>
+                <svg
+                  class="h-7 w-7"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  />
+                </svg>
+              </template>
+              В корзину
+            </UiButton>
 
-          <ul class="mt-3">
-            <li
-              v-for="property in product.properties"
-              :key="property.slug"
-              class="font-medium my-1"
-            >
-              {{ property.name }}:
-              <span class="font-normal ml-1">{{ property.value }}</span>
-            </li>
-          </ul>
+            <FavoriteIcon
+              :is-fill="isFavorite(product.slug)"
+              size="w-10 h-10"
+              @click.native="addFavorite(product.slug)"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -84,8 +76,10 @@
 </template>
 
 <script>
+import UiSlider from './UiSlider.vue'
 export default {
   name: 'TheProductPage',
+  components: { UiSlider },
   data() {
     return {
       product: {},
@@ -115,7 +109,7 @@ export default {
     },
 
     addToCart() {
-      this.$store.commit('cart/addToCart', this.product)
+      this.$store.commit('cart/addToCart', this.product.slug)
     },
 
     hide() {
