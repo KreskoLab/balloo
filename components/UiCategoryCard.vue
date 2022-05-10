@@ -2,11 +2,12 @@
   <div class="flex flex-col space-y-2 transform ease-in-out duration-300 hover:(cursor-pointer scale-105)">
     <NuxtLink :to="`/category/${category}/${slug}`">
       <nuxt-img
+        provider="cloudinary"
         class="rounded-sm"
-        width="320"
-        height="320"
+        width="512"
+        height="512"
         format="webp"
-        :src="$config.imagesURL + image"
+        :src="image"
         :alt="name"
       />
       <h1 class="font-medium text-xl text-dark-800 mt-2">{{ name }}</h1>
