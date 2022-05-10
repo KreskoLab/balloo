@@ -114,20 +114,34 @@
         </svg>
       </a>
 
-      <div
+      <UiDropdown
         v-else
-        class="cursor-pointer"
-        @click="$store.dispatch('user/logout')"
+        class="hidden lg:block"
       >
-        <span class="hidden lg:(block)">{{ user.name }}</span>
-      </div>
+        <template #header>
+          <span>{{ user.name }}</span>
+        </template>
+
+        <NuxtLink to="/settings">
+          <UiDropdownItem>Настройки</UiDropdownItem>
+        </NuxtLink>
+
+        <NuxtLink to="/settings">
+          <UiDropdownItem>Заказы</UiDropdownItem>
+        </NuxtLink>
+
+        <UiDropdownItem>Выйти</UiDropdownItem>
+      </UiDropdown>
     </div>
   </nav>
 </template>
 
 <script>
+import UiDropdown from './UiDropdown.vue'
+import UiDropdownItem from './UiDropdownItem.vue'
 export default {
   name: 'NavBar',
+  components: { UiDropdown, UiDropdownItem },
   computed: {
     user() {
       return this.$store.state.user.user
