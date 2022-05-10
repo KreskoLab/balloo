@@ -4,6 +4,7 @@ import cookie from 'cookie'
 
 export default ({ store, req }) => {
   createPersistedState({
+    key: 'balloo',
     paths: ['favorites', 'cart'],
     storage: {
       getItem: (key) => {
