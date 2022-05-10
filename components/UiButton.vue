@@ -2,10 +2,11 @@
   <button
     class="flex items-center justify-center space-x-3 text-lg font-medium w-full"
     :class="[color, size]"
+    @click="$emit('click')"
   >
     <slot name="icon" />
 
-    <span>
+    <span class="select-none">
       <slot />
     </span>
   </button>
