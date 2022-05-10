@@ -6,7 +6,7 @@
     </div>
 
     <div class="relative flex w-full h-screen overflow-y-auto overflow-x-hidden pt-20 lg:(pt-30)">
-      <SideBar v-if="$route.name !== 'index' && $route.name !== 'favorites'" />
+      <SideBar v-if="$route.name !== 'index' && $route.name !== 'favorites' && $route.name !== 'settings'" />
 
       <main class="w-full">
         <Nuxt />

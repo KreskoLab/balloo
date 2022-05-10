@@ -5,7 +5,7 @@
       class="page lg:(ml-[320px])"
     >
       <div class="flex flex-row justify-between items-center">
-        <h2 class="text-lg sm:text-2xl font-medium">{{ subcategory.name }}</h2>
+        <h2 class="text-base font-medium sm:(text-2xl)">{{ subcategory.name }}</h2>
 
         <div class="flex space-x-4">
           <div class="font-medium">дешевші</div>
@@ -36,7 +36,7 @@
           v-for="product in products"
           :key="product._id"
           :name="product.name"
-          :image="product.image"
+          :image="product.image[0]"
           :price="product.price"
           :slug="product.slug"
           :category="`${$route.params.id}/${$route.params.subcategory}`"

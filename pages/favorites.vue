@@ -24,7 +24,7 @@
           :name="product.name"
           :slug="product.slug"
           :price="product.price"
-          :image="product.image"
+          :image="product.image[0]"
           :category="product.category"
         />
       </div>

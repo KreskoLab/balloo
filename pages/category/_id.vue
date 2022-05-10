@@ -5,7 +5,7 @@
       class="page lg:(ml-[320px])"
     >
       <div class="flex flex-row justify-between items-center">
-        <h2 class="text-2xl font-medium">{{ category.name }}</h2>
+        <h2 class="text-base font-medium sm:(text-2xl)">{{ category.name }}</h2>
         <div class="font-medium">дешевші</div>
       </div>
 
@@ -16,7 +16,7 @@
         >
           <ProductCard
             :name="product.name"
-            :image="product.image"
+            :image="product.image[0]"
             :slug="product.slug"
             :price="product.price"
             :category="$route.params.id"
