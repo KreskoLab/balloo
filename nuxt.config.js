@@ -18,7 +18,7 @@ export default {
   css: ['@/assets/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/persistedState.js', mode: 'client' }, { src: '~/plugins/axios.js' }],
+  plugins: [{ src: '~/plugins/persistedState.js' }, { src: '~/plugins/axios.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -70,13 +70,14 @@ export default {
   },
 
   image: {
-    provider: 'ipx',
-    domains: [process.env.BACKEND_DOMAIN],
+    cloudinary: {
+      baseURL: 'https://res.cloudinary.com/kresko/image/upload/',
+    },
   },
 
-  serverMiddleware: {
-    '/_ipx': '~/server/middleware/ipx.js',
-  },
+  // serverMiddleware: {
+  //   '/_ipx': '~/server/middleware/ipx.js',
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
