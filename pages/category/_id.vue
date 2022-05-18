@@ -66,6 +66,7 @@ export default {
       this.$store.getters['categories/getSubcategoriesBySlug'](this.$route.params.id)
         .map(({ _id }) => _id)
         .forEach((id) => (query += `subcategories=${id}&`))
+
       return query
     },
   },
