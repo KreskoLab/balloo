@@ -9,10 +9,22 @@ export default {
     pay: 'Оплатить',
     total: 'Всего',
   },
+
   favorites: {
     title: 'Избранные товары',
     titleEmpty: 'Ваш список понравившихся товаров пустой',
     subtitle: 'Ваш список любимых товаров пустой',
     shop: 'Продолжить покупки',
+  },
+
+  settings: {
+    title: 'Настройки аккаунта',
+    button: 'Обновить',
+    nameInput: 'Имя',
+  },
+
+  dropdown: {
+    settings: 'Настройки',
+    logout: 'Выйти',
   },
 }
