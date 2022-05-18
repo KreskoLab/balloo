@@ -118,6 +118,7 @@ export default {
   async fetch() {
     if (this.cartProducts.length) {
       const slugs = this.cartProducts.map((product) => `slugs=${product.slug}`).join('&')
+
       this.products = await this.$axios
         .$get(`api/products?${slugs}`)
         .then((res) => res.map((product) => ({ ...product, amount: 1 })))
@@ -135,6 +136,12 @@ export default {
 
     total() {
       return this.products.reduce((total, cv) => total + Number(cv.price) * Number(cv.amount), 0)
+    },
+  },
+
+  watch: {
+    showCart(show) {
+      if (show) this.$fetch()
     },
   },
 
