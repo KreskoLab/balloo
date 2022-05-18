@@ -1,6 +1,9 @@
 <template>
   <div class="relative w-max">
-    <button @click="active = !active">
+    <button
+      v-click-outside="close"
+      @click="active = !active"
+    >
       <slot name="header" />
     </button>
 
@@ -19,13 +22,24 @@
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside'
+
 export default {
   name: 'UiDropdown',
-  props: {},
+  directives: {
+    ClickOutside,
+  },
+
   data() {
     return {
       active: false,
     }
+  },
+
+  methods: {
+    close() {
+      this.active = false
+    },
   },
 }
 </script>
