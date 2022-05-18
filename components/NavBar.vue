@@ -119,29 +119,22 @@
         class="hidden lg:block"
       >
         <template #header>
-          <span>{{ user.name }}</span>
+          <span class="font-medium">{{ user.name }}</span>
         </template>
 
         <NuxtLink to="/settings">
-          <UiDropdownItem>Настройки</UiDropdownItem>
+          <UiDropdownItem>{{ $t('dropdown.settings') }}</UiDropdownItem>
         </NuxtLink>
 
-        <NuxtLink to="/settings">
-          <UiDropdownItem>Заказы</UiDropdownItem>
-        </NuxtLink>
-
-        <UiDropdownItem>Выйти</UiDropdownItem>
+        <UiDropdownItem @click="logout()">{{ $t('dropdown.logout') }}</UiDropdownItem>
       </UiDropdown>
     </div>
   </nav>
 </template>
 
 <script>
-import UiDropdown from './UiDropdown.vue'
-import UiDropdownItem from './UiDropdownItem.vue'
 export default {
   name: 'NavBar',
-  components: { UiDropdown, UiDropdownItem },
   computed: {
     user() {
       return this.$store.state.user.user
@@ -164,6 +157,10 @@ export default {
     },
   },
 
+  created() {
+    this.$store.dispatch('user/getUser')
+  },
+
   methods: {
     showCart() {
       this.$store.commit('cart/showCart', true)
@@ -172,6 +169,10 @@ export default {
 
     showHamburgerMenu() {
       this.$store.commit('setHamburgerMenu')
+    },
+
+    logout() {
+      this.$store.dispatch('user/logout')
     },
   },
 }
