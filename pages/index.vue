@@ -22,8 +22,8 @@ export default {
   },
 
   watch: {
-    '$i18n.locale': async function () {
-      await this.$store.dispatch('categories/getCategories')
+    '$i18n.locale': function () {
+      this.$store.dispatch('categories/getCategories')
     },
   },
 }
