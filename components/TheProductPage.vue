@@ -76,10 +76,8 @@
 </template>
 
 <script>
-import UiSlider from './UiSlider.vue'
 export default {
   name: 'TheProductPage',
-  components: { UiSlider },
   data() {
     return {
       product: {},
@@ -93,6 +91,12 @@ export default {
   computed: {
     favorites() {
       return this.$store.state.favorites.list.map((favorite) => favorite.product)
+    },
+  },
+
+  watch: {
+    '$i18n.locale': function () {
+      this.$fetch()
     },
   },
 
