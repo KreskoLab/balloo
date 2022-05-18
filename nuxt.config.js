@@ -46,8 +46,9 @@ export default {
     apiURL: process.env.BACKEND_URL,
   },
 
-  windicss: {
-    analyze: true,
+  loading: {
+    color: '#2DD4BF',
+    height: '5px',
   },
 
   i18n: {
@@ -57,6 +58,7 @@ export default {
         iso: 'ua',
         file: 'ua.js',
       },
+
       {
         code: 'ru',
         iso: 'ru',
@@ -71,7 +73,7 @@ export default {
 
   image: {
     cloudinary: {
-      baseURL: 'https://res.cloudinary.com/kresko/image/upload/',
+      baseURL: process.env.CLOUDINARY_URL,
     },
   },
 
