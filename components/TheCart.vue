@@ -15,13 +15,13 @@
             <p class="text-2xl font-semibold">{{ $t('cart.title') }}</p>
 
             <div class="w-max">
-              <UiButton
+              <AppButton
                 color="bg-transparent"
                 size="py-0.3 px-2"
                 @click.native="hide()"
               >
                 X
-              </UiButton>
+              </AppButton>
             </div>
           </div>
 
@@ -55,7 +55,7 @@
             <div class="flex flex-col justify-between w-full ml-4 my-1">
               <p class="font-medium">{{ product.name }}</p>
 
-              <CartNumberInput
+              <AppNumber
                 :id="product._id"
                 :count="product.amount"
                 :max-count="product.quantity"
@@ -86,7 +86,7 @@
         </div>
 
         <div
-          v-if="products.length > 0"
+          v-if="products.length"
           class="px-8"
         >
           <div class="flex justify-between my-4">
@@ -95,9 +95,9 @@
           </div>
 
           <div class="w-full">
-            <UiButton color="bg-rose-200">
+            <AppButton color="bg-rose-200">
               {{ $t('cart.pay') }}
-            </UiButton>
+            </AppButton>
           </div>
         </div>
       </div>
@@ -118,7 +118,6 @@ export default {
   async fetch() {
     if (this.cartProducts.length) {
       const slugs = this.cartProducts.map((product) => `slugs=${product.slug}`).join('&')
-
       this.products = await this.$axios
         .$get(`api/products?${slugs}`)
         .then((res) => res.map((product) => ({ ...product, amount: 1 })))
@@ -153,7 +152,6 @@ export default {
     del(productSlug) {
       const index = this.products.indexOf((product) => product.slug === productSlug)
       this.products.splice(index, 1)
-
       this.$store.commit('cart/removeFromCart', productSlug)
     },
   },

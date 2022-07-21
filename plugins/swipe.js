@@ -1,5 +1,5 @@
 export default class TouchEvent {
-  static SWPIE_THRESHOLD = 10 // Minumum difference in pixels at which a swipe gesture is detected
+  static SWPIE_THRESHOLD = 50 // Minumum difference in pixels at which a swipe gesture is detected
 
   static SWIPE_LEFT = 1
   static SWIPE_RIGHT = 2

@@ -26,6 +26,7 @@
             type="checkbox"
             :value="{ value: filter.value, filter: filter.slug }"
           />
+
           <label
             class="cursor-pointer select-none ml-2"
             :for="filter.value"
@@ -40,7 +41,7 @@
 
 <script>
 export default {
-  name: 'SideBarFiltersList',
+  name: 'SidebarFiltersList',
   computed: {
     subcategoryId() {
       return this.$store.getters['categories/getSubcategoryBySlug'](this.$route.params.subcategory)._id

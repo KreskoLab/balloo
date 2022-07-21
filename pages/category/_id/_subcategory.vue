@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="!$fetchState.pending"
-      class="page lg:(ml-[320px])"
+      class="lg:(ml-[320px])"
     >
       <div class="flex flex-row justify-between items-center">
         <h2 class="text-base font-medium sm:(text-2xl)">{{ subcategory.name }}</h2>
@@ -60,9 +60,8 @@ export default {
     this.$store.commit('categories/setSubcategory', this.$route.params.subcategory)
 
     await this.$axios.$get(`api/products?subcategories=${this.subcategory._id}`).then((res) => {
-      this.products = res.map(({ subcategory, properties, name, ...rest }) => ({
+      this.products = res.map(({ subcategory, properties, ...rest }) => ({
         ...rest,
-        name: name.value,
       }))
     })
   },

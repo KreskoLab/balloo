@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'NavBarCategoriesList',
+  name: 'CategoriesList',
   computed: {
     categoriesList() {
       return this.$store.state.categories.list

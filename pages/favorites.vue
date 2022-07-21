@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div>
     <h1 class="text-2xl font-semibold">
       <template v-if="favorites.length">
         {{ $t('favorites.title') }}
@@ -9,6 +9,7 @@
         {{ $t('favorites.titleEmpty') }}
       </template>
     </h1>
+
     <h2 class="text-dark-200 font-medium mt-4">
       {{ $t('favorites.subtitle') }}
     </h2>
@@ -34,7 +35,7 @@
         class="flex justify-center items-center my-16"
       >
         <nuxt-link to="/">
-          <UiButton color="bg-red-200"> {{ $t('favorites.shop') }}</UiButton>
+          <AppButton color="bg-red-200"> {{ $t('favorites.shop') }}</AppButton>
         </nuxt-link>
       </div>
     </div>
@@ -53,9 +54,9 @@ export default {
     if (this.favorites.length > 0) {
       let query = ''
       this.favorites.forEach((item) => (query += `slugs=${item.product}&`))
+
       await this.$axios.$get(`api/products?${query}`).then((res) => {
-        this.products = res.map(({ name, subcategories, ...rest }, index) => ({
-          name: name.value,
+        this.products = res.map(({ subcategories, ...rest }, index) => ({
           category: this.favorites[index].category,
           ...rest,
         }))

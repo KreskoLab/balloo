@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'SideBarSubcategoriesList',
+  name: 'SidebarSubcategoriesList',
   computed: {
     subcategories() {
       return this.$store.getters['categories/getSubcategoriesBySlug'](this.$route.params.id)

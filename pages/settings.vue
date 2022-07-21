@@ -6,14 +6,14 @@
       class="flex flex-col space-y-4"
       @submit.prevent="updateUser()"
     >
-      <UiInput
+      <AppInput
         v-model="user.name"
         :label="$t('settings.nameInput')"
         :value="user.name"
         :required="true"
       />
 
-      <UiInput
+      <AppInput
         v-model="user.email"
         label="Email"
         type="email"
@@ -21,7 +21,7 @@
         :required="true"
       />
 
-      <UiInput
+      <AppInput
         v-model="user.phone"
         label="Телефон"
         type="tel"
@@ -29,7 +29,7 @@
         :required="true"
       />
 
-      <UiButton color="bg-blue-100">{{ $t('settings.button') }}</UiButton>
+      <AppButton color="bg-blue-100">{{ $t('settings.button') }}</AppButton>
     </form>
   </div>
 </template>

@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'UiButton',
+  name: 'AppButton',
   props: {
     color: {
       type: String,

@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'CartNumberInput',
+  name: 'AppNumber',
   props: {
     id: {
       type: String,
@@ -32,14 +32,12 @@ export default {
     inc() {
       if (this.count < this.maxCount) {
         this.$emit('inc')
-        // this.$store.commit('cart/incAmount', this.id)
       }
     },
 
     dec() {
       if (this.count !== 1) {
         this.$emit('dec')
-        // this.$store.commit('cart/decAmount', this.id)
       }
     },
   },

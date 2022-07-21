@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'UiCategoryCard',
+  name: 'CategoryCard',
   props: {
     name: {
       type: String,

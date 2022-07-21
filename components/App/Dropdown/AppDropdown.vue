@@ -25,7 +25,7 @@
 import ClickOutside from 'vue-click-outside'
 
 export default {
-  name: 'UiDropdown',
+  name: 'AppDropdown',
   directives: {
     ClickOutside,
   },

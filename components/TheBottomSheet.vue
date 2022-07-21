@@ -25,12 +25,12 @@
             class="ml-auto w-8 mt-4"
             @click="unShow()"
           >
-            <UiButton
+            <AppButton
               color="bg-transparent"
               size="py-0.5 px-2"
             >
               X
-            </UiButton>
+            </AppButton>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'SideBarBottomSheet',
+  name: 'TheBottomSheet',
   data() {
     return {
       show: true,

@@ -9,6 +9,6 @@
 
 <script>
 export default {
-  name: 'UiDropdownItem',
+  name: 'AppDropdownItem',
 }
 </script>

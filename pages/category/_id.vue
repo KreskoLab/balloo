@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="show"
-      class="page lg:(ml-[320px])"
+      class="lg:(ml-[320px])"
     >
       <div class="flex flex-row justify-between items-center">
         <h2 class="text-base font-medium sm:(text-2xl)">{{ category.name }}</h2>
@@ -41,7 +41,7 @@ export default {
     this.products = await this.$axios.$get(`api/products?${this.subcategories_query}`).then((res) => {
       return res.map((product) => ({
         ...product,
-        name: product.name.value,
+        name: product.name,
       }))
     })
   },
@@ -63,6 +63,7 @@ export default {
 
     subcategories_query() {
       let query = ''
+
       this.$store.getters['categories/getSubcategoriesBySlug'](this.$route.params.id)
         .map(({ _id }) => _id)
         .forEach((id) => (query += `subcategories=${id}&`))
